@@ -4,7 +4,7 @@ import config from "../config/config";
 export class Db {
   client = new Client();
   database;
-  bucket //storage
+  bucket; //storage
 
   constructor() {
     this.client
@@ -91,7 +91,7 @@ export class Db {
             config.appwriteDatabaseId,
             config.appwriteCollectionId,
             [
-                Query.equal('status', 'active')
+                Query.equal('status', 'active'), Query.sort('createdAt', 'desc')
                 // you can list multiple queries in this array
             ]
         )
@@ -144,4 +144,8 @@ filePreview(fileId){
         fileId
     )
    }
+
 }
+
+const Service= new Db()
+export default Service
