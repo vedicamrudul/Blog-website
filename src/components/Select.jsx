@@ -13,7 +13,7 @@ function Select({
   return (
     <div className='w-full'>
         {/* label && cuz we need to first check if label has been passed as a prop or not */}
-        {label && <label htmlFor={id} className=''></label>}
+        {label && <label htmlFor={id} className=''>{label}</label>}
         <select
         {...props}
         id={id}

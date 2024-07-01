@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./appwrite/auth";
-import { login } from "./store/authSlice";
+import { login, logout } from "./store/authSlice";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import { Outlet } from 'react-router-dom'
 
 function App() {
   console.log(import.meta.env.VITE_APPWRITE_URL);
@@ -13,7 +14,7 @@ function App() {
 
   useEffect(() => {
     authService
-      .getUserAccount()
+      .getCurrentUser()
       .then((userData) => {
         if (userData) {
           dispatch(login({ userData }));
@@ -30,7 +31,8 @@ if(!loading){
     <div><div>
       <Header/>
       <main>
-        TODO: {/* outlet */}
+        <Outlet />
+        
       </main>
       <Footer/>
       </div></div>

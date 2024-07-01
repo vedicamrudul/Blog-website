@@ -1,12 +1,13 @@
 // real time editor
 // explained a lil more in the end
 import React from 'react';
-import { Editor } from 'tinymce';
+import {Editor } from '@tinymce/tinymce-react';
+
 import { Controller } from 'react-hook-form';
 // see its sort of like react hook form manages the state of components but tiny mce editor manages its own state. so we need to use controller to connect the two whereas in the case of normal input fields we dont need to do that because react hook form manages the state of the input fields directly using the register hook
 
 export default function RTE({ name, control, label, defaultValue = "", ...props }) {
-    //  name is the name of the field, control is the control object that we get from the useForm hook, label is the label of the field, defaultValue is the default value of the field
+   console.log("RTE component called") //  name is the name of the field, control is the control object that we get from the useForm hook, label is the label of the field, defaultValue is the default value of the field
     return (
         <div className='w-full'>
             {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
@@ -16,6 +17,7 @@ export default function RTE({ name, control, label, defaultValue = "", ...props 
                 control={control}
                 render={({ field: { onChange } }) => (
                     <Editor
+                    
                         initialValue={defaultValue}
                         init={{
                             initialValue: defaultValue,
@@ -50,6 +52,7 @@ export default function RTE({ name, control, label, defaultValue = "", ...props 
                         }}
                         onEditorChange={onChange}
                         {...props}
+                        apiKey='pbbr9b8moku4zmoi9b30djhlz2xq7aaaqthrmusxf7fp2wh6' 
                     />
                 )}
             />

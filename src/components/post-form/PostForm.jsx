@@ -2,12 +2,13 @@ import React, { useCallback, useEffect } from 'react'
 // revision of useCallback: useCallback is a hook that will return a memoized version of the callback function that only changes if one of the dependencies has changed. This is useful when passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders (e.g. shouldComponentUpdate in React).
 import { useForm } from 'react-hook-form'
 import Button from '../Button'
+import Select from '../Select'
 import Input from '../Input'
 import RTE from '../RTE'
 import { useSelector } from 'react-redux'
 import Service from '../../appwrite/Db'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -24,7 +25,7 @@ export default function PostForm({ post }) {
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? await Service.uploadFile(data.image[0]) : null;
-// upload file returns the id of the file that was uploaded? id of image that was uploaded?
+            // upload file returns the id of the file that was uploaded? id of image that was uploaded?
             if (file) {
                 if (post.featuredImage) {
                     await Service.deleteFile(post.featuredImage)
@@ -94,13 +95,16 @@ export default function PostForm({ post }) {
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
             <div className="w-1/3 px-2">
-                <Input
-                    label="Featured Image :"
-                    type="file"
-                    className="mb-4"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image", { required: !post })}
-                />
+                <div className="mb-4">
+                    <label htmlFor="featured-image">Featured Image :</label>
+                    <Input
+                        id="featured-image"
+                        type="file"
+                        className="mb-4"
+                        accept="image/png, image/jpg, image/jpeg, image/gif"
+                        {...register("image", { required: !post })}
+                    />
+                </div>
                 {post && (
                     <div className="w-full mb-4">
                         <img
@@ -110,7 +114,7 @@ export default function PostForm({ post }) {
                         />
                     </div>
                 )}
-                x     <Select
+                <Select
                     options={["active", "inactive"]}
                     label="Status"
                     className="mb-4"
@@ -121,6 +125,5 @@ export default function PostForm({ post }) {
                 </Button>
             </div>
         </form>
-
-    )
+    );
 }

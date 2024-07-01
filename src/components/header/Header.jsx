@@ -1,15 +1,14 @@
 import React from 'react'
-import { NavLink,Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import LogoutBtn from './LogoutBtn'
 import { useSelector } from 'react-redux'
-import authSlice from '../../store/authSlice'
 import Container from '../container/Container'
 
 
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status)
-
+  const navigate = useNavigate()
   const navItems = [
     {
       name: 'Home',
@@ -24,7 +23,7 @@ function Header() {
     {
       name: 'SignUp',
       path: '/signup',
-      active: authStatus
+      active: !authStatus
     },
     {
       name: "All Posts",
@@ -44,6 +43,7 @@ function Header() {
       <Container>
       <nav className='flex'>
           <div className='mr-4'>
+            LOGO HAHAHAHA
             {/* <Link to='/'>
               <Logo width='70px'   />
 

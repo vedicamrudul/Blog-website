@@ -24,38 +24,39 @@ export class AuthService {
 
       if (userAccount) {
         // if user account exists then we call another function so that as soon as we confirm the user exists we can let the user login. Basically we call the login function that we will create if the account exists
-        return this.loginAccount({ email, password });
+        return await this.loginAccount({ email, password });
       } else {
         return userAccount; //this will return null if it doesnt exist
       }
     } catch (error) {
-      print("There was an error in creating the account. Please try again.");
       throw error;
     }
   }
 
-  async loginAccount({ email, password }) {
+  async loginAccount({email, password}) {
     try {
-      const loginAcc = await this.account.createEmailSession(email, password);
-      return loginAcc;
+      const session = await this.account.createEmailPasswordSession(email, password);
+      console.log('Logged in:', session);
+      console.log("mai ro dungi")
+      return session;
     } catch (error) {
-      print("There was an error in logging in. Please try again.");
+      console.log("mai aur bhi ro dungi")
+      console.error('Login failed:', error);
       throw error;
     }
   }
 
-  async getUserAccount() {
+  async getCurrentUser() {
     try {
-      return await this.account.get();
-      // logged in
-      //these are all features provided by appwrite, like you can get an account, login etc. You just need to read the docs.
+      const user = await this.account.get();
+      console.log('User:', user);
+      return user;
     } catch (error) {
-      // not logged in
-      print("You are not logged in.");
-      throw error;
+      console.error('You are not logged in.', error);
+      throw error; // Rethrow the error to let the caller handle it
+    } finally {
+      console.log("getUserAccount executed");
     }
-
-    return null; // you could just have used try ke andar if else to check if we did get the account and if not return nothing but here we just said return null outside try catch in case there is no account
   }
 
   //end session in the docs basically means logout

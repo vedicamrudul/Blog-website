@@ -4,7 +4,7 @@ import authService from '../../appwrite/auth'
 import { useDispatch } from 'react-redux'
 
 function LogoutBtn() {
-  dispatch = useDispatch
+  const dispatch = useDispatch()
   const handleClick = () => {
     authService.logout().then(() => {
       dispatch(logout())

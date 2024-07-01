@@ -34,7 +34,7 @@ export class Db {
     }
   }
 
-  async updatePost(slug, { title, content, featuredImage, status, userId }) {
+  async updatePost(slug, { title, content, featuredImage, status }) {
     try {
       const updatedPost = await this.database.updateDocument(
         config.appwriteDatabaseId,
@@ -45,7 +45,6 @@ export class Db {
           content,
           featuredImage,
           status,
-          userId,
         }
       );
 
@@ -88,7 +87,6 @@ export class Db {
         config.appwriteCollectionId,
         [
           Query.equal("status", "active"),
-          Query.sort("createdAt", "desc"),
           // you can list multiple queries in this array
         ]
       );

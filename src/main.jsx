@@ -5,7 +5,7 @@ import store from './store/store.js'
 import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import {AuthLayout} from './layouts/AuthLayout'
+import AuthLayout from './components/AuthLayout.jsx'
 
 import Login from './pages/Login.jsx'
 import AddPost from './pages/AddPosts.jsx'
