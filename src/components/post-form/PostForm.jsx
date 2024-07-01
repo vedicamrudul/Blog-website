@@ -24,14 +24,17 @@ export default function PostForm({ post }) {
     const submit = async (data) => {
         if (post) {
             const file = data.image[0] ? await Service.uploadFile(data.image[0]) : null;
-
+// upload file returns the id of the file that was uploaded? id of image that was uploaded?
             if (file) {
-                Service.deleteFile(post.featuredImage);
+                if (post.featuredImage) {
+                    await Service.deleteFile(post.featuredImage)
+                }
             }
 
             const dbPost = await Service.updatePost(post.$id, {
                 ...data,
-                featuredImageq: file ? file.$id : undefined
+                featuredImage: file ? file.$id : undefined
+                // since file stores the id of the image that was uploaded, we can use it to update the featured image of the post
             })
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`)
@@ -57,9 +60,8 @@ export default function PostForm({ post }) {
                 .toLowerCase()
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 .replace(/\s/g, "-");
-
-            return "";
         }
+        return "";
     }, [])
 
     useEffect(() => {
@@ -102,13 +104,13 @@ export default function PostForm({ post }) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={Service.FilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
                     </div>
                 )}
-                <Select
+                x     <Select
                     options={["active", "inactive"]}
                     label="Status"
                     className="mb-4"

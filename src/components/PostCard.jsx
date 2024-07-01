@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 
 function PostCard({$id, title, featuredImage}) {
     // this is the syntax of appwrite; the id is written as '$id'
+    // the featuredImage is the id of the image in the storage and the $id is the id of the post
   return (
     <Link to={`/post/${$id}`}>
         <div className='w-full bg-gray-100 rounded-xl p-4'>
