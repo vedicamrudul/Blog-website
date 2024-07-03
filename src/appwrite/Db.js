@@ -1,4 +1,4 @@
-import { Client, Databases, Query, Storage } from "appwrite";
+import { Client, Databases, Query, Storage, ID } from "appwrite";
 import config from "../config/config";
 
 export class Db {
@@ -16,7 +16,7 @@ export class Db {
 
   async createPost({ title, slug, content, featuredImage, status, userId }) {
     try {
-      const post = await this.database.createDocuemnt(
+      const post = await this.database.createDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
         slug,
@@ -122,7 +122,11 @@ export class Db {
   }
 
   filePreview(fileId) {
-    return this.bucket.getFilePreview(config.appwriteBucketId, fileId);
+    console.log("i am here in filepreview")
+    console.log(fileId)
+    const result=this.bucket.getFilePreview(config.appwriteBucketId, fileId);
+    console.log(result.href)
+    return result.href;
   }
 
   fileDownload() {

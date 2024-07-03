@@ -4,19 +4,37 @@ import Container from '../components/container/Container'
 import PostCard from '../components/PostCard'
 import { useSelector } from 'react-redux'
 
-
 function Home() {
-
-
-    const userStatus= useSelector(state=>state.auth.status)
+    const userStatus = useSelector(state => state.auth.status)
     const [posts, setPosts] = React.useState([])
+    const [loading, setLoading] = React.useState(false)
 
     useEffect(() => {
+        setLoading(true)
         Service.getAllPosts().then((res) => {
-            if (res)
+            if (res) {
                 setPosts(res.documents)
+            }
+            setLoading(false) // Move setLoading(false) here to accurately reflect loading state
         })
     }, [])
+
+    // Show loading indicator when loading
+    if (loading) {
+        return (
+            <div className="w-full py-8 mt-4 text-center">
+                <Container>
+                    <div className="flex flex-wrap">
+                        <div className="p-2 w-full">
+                            <h1 className="text-2xl font-bold">
+                                Loading...
+                            </h1>
+                        </div>
+                    </div>
+                </Container>
+            </div>
+        )
+    }
 
     if (posts.length === 0 && userStatus) {
         return (
@@ -32,14 +50,14 @@ function Home() {
                 </Container>
             </div>
         )
-    }else if(posts.length===0 && !userStatus){
+    } else if (posts.length === 0 && !userStatus) {
         return (
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
                             <h1 className="text-2xl font-bold hover:text-gray-500">
-                                No posts
+                                Login to view Posts
                             </h1>
                         </div>
                     </div>
@@ -61,7 +79,6 @@ function Home() {
                 </div>
             </Container>
         </div>
-
     )
 }
 
