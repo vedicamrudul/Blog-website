@@ -11,8 +11,14 @@ export default function Post() {
     const {slug}=useParams()
     const navigate=useNavigate()
 
+    
+
     const userData=useSelector((state)=> state.auth.userData)
-    const isAuthor=post && userData ? post.userId===userData.$id : false;
+    const isAuthor=post && userData ? post.userId===userData.userData.$id : false;
+    console.log(userData)
+    
+
+    console.log(isAuthor)
 
     useEffect(()=>{
         if(slug){
@@ -35,12 +41,19 @@ export default function Post() {
         })
     }
 
+    const editPost=()=>{
+        console.log('edit post');
+        
+    }
+   
+
     return post ? (
-        <div className="py-8">
+        <div className="py-8 min-h-[80vh]">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className=" flex  items-center justify-center mb-4 relative border  border-[0.2px] rounded-xl p-2">
                     {console.log(Service.filePreview(post.featuredImage))}
                     <img
+                    width={700}
                         src={Service.filePreview(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
@@ -49,12 +62,12 @@ export default function Post() {
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
-                                    Edit
+                                <Button onClick={editPost} btnText="Edit" bgColor="bg-green-500" className="mr-3">
+                                    
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
+                            <Button onClick={deletePost} btnText="Delete" bgColor="bg-red-500">
+                                
                             </Button>
                         </div>
                     )}

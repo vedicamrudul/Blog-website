@@ -22,11 +22,11 @@ function Home() {
     // Show loading indicator when loading
     if (loading) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
+            <div className="w-full flex items-center justify-center h-[80vh] py-8 text-center">
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold">
+                            <h1 className="text-[3rem] font-bold hover:text-gray-500">
                                 Loading...
                             </h1>
                         </div>
@@ -38,11 +38,11 @@ function Home() {
 
     if (posts.length === 0 && userStatus) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
+            <div className="w-full flex items-center justify-center h-[80vh] py-8 text-center">
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                            <h1 className="text-[3rem] font-bold hover:text-gray-500">
                                 No posts
                             </h1>
                         </div>
@@ -52,26 +52,26 @@ function Home() {
         )
     } else if (posts.length === 0 && !userStatus) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to view Posts
-                            </h1>
-                        </div>
+            <div className="w-full flex items-center justify-center h-[80vh] py-8 text-center">
+            <Container>
+                <div className="flex flex-wrap">
+                    <div className="p-2 w-full">
+                        <h1 className="text-[3rem] font-bold hover:text-gray-500">
+                            Login To View Posts
+                        </h1>
                     </div>
-                </Container>
-            </div>
+                </div>
+            </Container>
+        </div>
         )
     }
     return (
-        <div className="w-full py-8 mt-4">
+        <div className="w-full min-h-[80vh] py-8">
             <Container>
-                <div className='flex flex-wrap'>
+                <div className='flex justify-center  align-center flex-wrap s'>
                     {posts.map((post) => {
                         return (
-                            <div key={post.$id} className='p-2 w-1/4'>
+                            <div key={post.$id} className='p-2 shadow-md bg-color2 shadow-color4 rounded-lg m-8 w-1/4'>
                                 <PostCard {...post} />
                             </div>
                         )

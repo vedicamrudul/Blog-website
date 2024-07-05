@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import LogoutBtn from './LogoutBtn'
 import { useSelector } from 'react-redux'
 import Container from '../container/Container'
+import { Link } from 'react-router-dom'
 
 
 
@@ -25,11 +26,11 @@ function Header() {
       path: '/signup',
       active: !authStatus
     },
-    {
-      name: "All Posts",
-      path: '/all-posts',
-      active: authStatus
-    },
+    // {
+    //   name: "All Posts",
+    //   path: '/all-posts',
+    //   active: authStatus
+    // },
     {
       name: "Add Post",
       path: '/add-post',
@@ -39,15 +40,17 @@ function Header() {
 
   return (
     <>
-    <header className='py-3 shadow bg-gray-500'>
+    <header className=' py-3 shadow-md shadow-inner  shadow-color4 bg-color2'>
       <Container>
       <nav className='flex'>
           <div className='mr-4'>
-            LOGO HAHAHAHA
-            {/* <Link to='/'>
-              <Logo width='70px'   />
+     
+            <Link to='/'>
+              <div width='70px ' className='pt-2' >
+Logo
+              </div>
 
-              </Link> */}
+              </Link>
           </div>
           <ul className='flex ml-auto'>
             {navItems.map((item) => 
