@@ -25,18 +25,7 @@ A feature-rich blog website built with modern technologies to provide an engagin
 
 ## **Demo**
 
-Check out the live demo: [Demo Link](https://example.com)  
-
-### **Screenshots**
-
-1. **Homepage:**
-   ![Homepage](https://via.placeholder.com/800x400.png?text=Homepage)
-
-2. **Post Editor:**
-   ![Post Editor](https://via.placeholder.com/800x400.png?text=Post+Editor)
-
-3. **User Profile:**
-   ![User Profile](https://via.placeholder.com/800x400.png?text=User+Profile)
+Check out the live demo as well provided in the repo itself.
 
 ## **Installation**
 
